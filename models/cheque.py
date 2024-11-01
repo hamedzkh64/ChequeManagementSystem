@@ -1,5 +1,3 @@
-# models/cheque.py
-
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -100,4 +98,32 @@ class Cheque(models.Model):
             self.amount,
             self.category_id.journal_id,
             ref=f"Transferred Cheque - {self.check_number}"
+        )
+
+    def action_clear_cheque(self):
+        """Clear the cheque after successful deposit."""
+        self.ensure_one()
+        if self.status != 'transferred':
+            raise ValidationError("Only transferred cheques can be cleared.")
+        self.status = 'cleared'
+        self.create_account_move(
+            self.category_id.debit_account_id,
+            self.category_id.credit_account_id,
+            self.amount,
+            self.category_id.journal_id,
+            ref=f"Cleared Cheque - {self.check_number}"
+        )
+
+    def action_return_cheque(self):
+        """Return a bounced or rejected cheque."""
+        self.ensure_one()
+        if self.status != 'transferred':
+            raise ValidationError("Only transferred cheques can be returned.")
+        self.status = 'returned'
+        self.create_account_move(
+            self.category_id.credit_account_id,
+            self.category_id.debit_account_id,
+            self.amount,
+            self.category_id.journal_id,
+            ref=f"Returned Cheque - {self.check_number}"
         )
