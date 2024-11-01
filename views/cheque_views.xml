@@ -1,0 +1,51 @@
+<odoo>
+    <!-- Cheque Form View -->
+    <record id="view_cheque_form" model="ir.ui.view">
+        <field name="name">cheque_management.cheque.form</field>
+        <field name="model">cheque_management.cheque</field>
+        <field name="arch" type="xml">
+            <form string="Cheque">
+                <sheet>
+                    <group>
+                        <field name="check_number"/>
+                        <field name="saad_number"/>
+                        <field name="amount"/>
+                        <field name="issue_date"/>
+                        <field name="maturity_date"/>
+                        <field name="status"/>
+                        <field name="customer_id"/>
+                        <field name="issuer_name"/>
+                        <field name="issuer_national_id"/>
+                        <field name="category_id"/>
+                        <field name="checkbook_id"/>
+                    </group>
+                    <footer>
+                        <button name="action_receive_cheque" type="object" string="Receive Cheque" class="btn-primary"/>
+                        <button name="action_issue_cheque" type="object" string="Issue Cheque" class="btn-secondary"/>
+                        <button name="action_endorse_cheque" type="object" string="Endorse Cheque" class="btn-info"/>
+                        <button name="action_transfer_cheque" type="object" string="Transfer to Bank" class="btn-success"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cheque List View -->
+    <record id="view_cheque_tree" model="ir.ui.view">
+        <field name="name">cheque_management.cheque.tree</field>
+        <field name="model">cheque_management.cheque</field>
+        <field name="arch" type="xml">
+            <tree string="Cheques">
+                <field name="check_number"/>
+                <field name="saad_number"/>
+                <field name="amount"/>
+                <field name="maturity_date"/>
+                <field name="status"/>
+                <field name="customer_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_cheque_management_cheques" parent="menu_cheque_management_root" name="Cheques"
+              action="action_cheque_management_cheque" sequence="30"/>
+</odoo>
