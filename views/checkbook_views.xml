@@ -1,0 +1,50 @@
+<odoo>
+    <!-- Checkbook Form View -->
+    <record id="view_checkbook_form" model="ir.ui.view">
+        <field name="name">cheque_management.checkbook.form</field>
+        <field name="model">cheque_management.checkbook</field>
+        <field name="arch" type="xml">
+            <form string="Checkbook">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="bank_account_id"/>
+                        <field name="branch"/>
+                        <field name="total_leaves"/>
+                        <field name="starting_check_number"/>
+                        <field name="starting_serial_number"/>
+                        <field name="starting_saad_number"/>
+                    </group>
+                    <notebook>
+                        <page string="Leaves">
+                            <field name="leaf_ids">
+                                <tree>
+                                    <field name="check_number"/>
+                                    <field name="serial_number"/>
+                                    <field name="saad_number"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Checkbook List View -->
+    <record id="view_checkbook_tree" model="ir.ui.view">
+        <field name="name">cheque_management.checkbook.tree</field>
+        <field name="model">cheque_management.checkbook</field>
+        <field name="arch" type="xml">
+            <tree string="Checkbooks">
+                <field name="name"/>
+                <field name="bank_account_id"/>
+                <field name="total_leaves"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_cheque_management_checkbook" parent="menu_cheque_management_root" name="Checkbooks"
+              action="action_cheque_management_checkbook" sequence="10"/>
+</odoo>
