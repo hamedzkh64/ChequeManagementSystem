@@ -1,0 +1,39 @@
+<odoo>
+    <!-- Reminder Form View -->
+    <record id="view_reminder_form" model="ir.ui.view">
+        <field name="name">cheque_management.reminder.form</field>
+        <field name="model">cheque_management.reminder</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Reminder">
+                <sheet>
+                    <group>
+                        <field name="cheque_id"/>
+                        <field name="reminder_date"/>
+                        <field name="reminder_type"/>
+                        <field name="frequency"/>
+                        <field name="channel"/>
+                        <field name="recipient_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Reminder List View -->
+    <record id="view_reminder_tree" model="ir.ui.view">
+        <field name="name">cheque_management.reminder.tree</field>
+        <field name="model">cheque_management.reminder</field>
+        <field name="arch" type="xml">
+            <tree string="Reminders">
+                <field name="cheque_id"/>
+                <field name="reminder_date"/>
+                <field name="reminder_type"/>
+                <field name="frequency"/>
+                <field name="channel"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_cheque_management_reminders" parent="menu_cheque_management_root" name="Notifications & Reminders"
+              action="action_cheque_management_reminder" sequence="40"/>
+</odoo>
